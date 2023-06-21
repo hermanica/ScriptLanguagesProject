@@ -83,8 +83,6 @@ class NBADataScraper:
                 self.scrape_game(filepath)
 
 
-# Użycie klasy NBADataScraper
+# testing datascraper class
 scraper = NBADataScraper()
 scraper.scrape_data()
-
-
