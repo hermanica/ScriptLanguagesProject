@@ -10,6 +10,7 @@ class PLDataScraping:
         self.years = list(range(2022, 2020, -1))
         self.all_matches = []
     
+    # this method scrapes the Premier League data from the FBRef website for seasons 2021-22 and 2022-23
     def scrape_data(self):
         for year in self.years:
             data = requests.get(self.standings_url)
