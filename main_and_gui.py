@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBo
 from PyQt5.QtCore import Qt, pyqtSlot
 from prediction import FootballMatchPredictor
 
+# this class creates a widget for the first two options in the menu
 class PredictionWindow(QWidget):
     def __init__(self, title, description, accuracy_score):
         super().__init__()
@@ -34,7 +35,7 @@ class PredictionWindow(QWidget):
     def back_to_menu(self):
         gui.stacked_widget.setCurrentIndex(0)
 
-
+# this class creates a widget for the last option in the menu
 class WinsComparisonWindow(QWidget):
     def __init__(self, predicted_wins, actual_wins):
         super().__init__()
@@ -76,7 +77,7 @@ class WinsComparisonWindow(QWidget):
     def back_to_menu(self):
         gui.stacked_widget.setCurrentIndex(0)
 
-
+# this class is responsible for the overall working of the GUI
 class FootballMatchPredictorGUI(QMainWindow):
     def __init__(self):
         super().__init__()

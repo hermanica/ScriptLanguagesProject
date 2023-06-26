@@ -38,6 +38,7 @@ class FootballMatchPredictor:
         self.matches = grouped_matches.apply(self.rolling_averages).droplevel('team')
         self.matches.index = range(self.matches.shape[0])
         
+    # all of the models are trained with data from the matches before January 1st 2023
     def train_initial_model(self):
         train = self.matches[self.matches["date"] < '2023-01-01']
         self.rf_initial.fit(train[self.predictors], train["target"])
@@ -89,7 +90,12 @@ class FootballMatchPredictor:
     #     projected_points = projected_points.sort_values(ascending=False)
     #     return projected_points
 
-        
+    def get_actual_wins(self):
+        test = self.matches[self.matches["date"] > '2023-01-01']
+        actual_wins = test[test["result"] == "W"]["team"].value_counts().to_dict()
+        return actual_wins
+    
+    
     def run_simulation(self):
         self.load_data()
         self.clean_data()
@@ -106,7 +112,7 @@ class FootballMatchPredictor:
         combined_initial = combined_initial.merge(self.matches[["date", "team", "opponent", "result"]], left_index=True, right_index=True)
         print(combined_initial)
 
-        # Rolling model
+        # Rolling averages model
         print("\nRolling model:")
         self.train_rolling_model()
         combined_rolling, error_rolling = self.make_predictions("rolling")
@@ -131,6 +137,6 @@ class FootballMatchPredictor:
 
 
 
-if __name__ == '__main__':
-    predictor = FootballMatchPredictor("matches.csv")
-    predictor.run_simulation()
+# if __name__ == '__main__':
+#     predictor = FootballMatchPredictor("matches.csv")
+#     predictor.run_simulation()
