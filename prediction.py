@@ -129,11 +129,6 @@ class FootballMatchPredictor:
         for team, wins in predicted_wins.items():
             print(f"{team}: {wins}")
 
-        # # Projected Points
-        # print("\nProjected Points:")
-        # projected_points = self.get_projected_points()
-        # for team, points in projected_points.items():
-        #     print(f"{team}: {int(points)}")
 
 
 if __name__ == '__main__':
